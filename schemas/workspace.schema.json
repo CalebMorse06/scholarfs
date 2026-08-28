@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scholarfs:schema:workspace:1",
+  "title": "ScholarFS workspace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "name", "term", "timezone", "created_at", "privacy"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "term": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "timezone": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["default_repository_visibility", "private_context_included_by_default"],
+      "properties": {
+        "default_repository_visibility": { "const": "private" },
+        "private_context_included_by_default": { "const": false }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scholarfs:schema:notifications:1",
+  "title": "ScholarFS notification preferences",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "calendar"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "calendar": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["default_reminders_minutes", "include_completed"],
+      "properties": {
+        "default_reminders_minutes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 0 }
+        },
+        "include_completed": { "type": "boolean" }
+      }
+    }
+  }
+}
+

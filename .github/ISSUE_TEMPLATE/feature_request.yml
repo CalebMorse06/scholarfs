@@ -1,0 +1,38 @@
+name: Feature request
+description: Propose a focused improvement to the portable workspace standard.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Student outcome
+      description: Which concrete semester task becomes easier or safer?
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current limitation
+      description: Why cannot current Markdown, JSON, or CLI behavior represent it?
+    validations:
+      required: true
+  - type: textarea
+    id: ownership
+    attributes:
+      label: Canonical data owner and schema impact
+    validations:
+      required: true
+  - type: textarea
+    id: trust
+    attributes:
+      label: Privacy, failure, and rollback behavior
+    validations:
+      required: true
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: What stays out of scope?
+    validations:
+      required: true
+

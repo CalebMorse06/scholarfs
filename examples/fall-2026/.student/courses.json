@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "courses": [
+    {
+      "code": "CS-241",
+      "title": "Systems Programming",
+      "instructor": "Dr. Mira Chen",
+      "credits": 4,
+      "term": "Fall 2026",
+      "source": { "type": "manual" },
+      "created_at": "2026-08-20T15:05:00Z"
+    },
+    {
+      "code": "STAT-210",
+      "title": "Applied Statistics",
+      "instructor": "Prof. Daniel Okafor",
+      "credits": 3,
+      "term": "Fall 2026",
+      "source": { "type": "manual" },
+      "created_at": "2026-08-20T15:06:00Z"
+    }
+  ]
+}
+

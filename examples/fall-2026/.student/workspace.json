@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "Lakeview University example",
+  "term": "Fall 2026",
+  "timezone": "America/Chicago",
+  "created_at": "2026-08-20T15:00:00Z",
+  "privacy": {
+    "default_repository_visibility": "private",
+    "private_context_included_by_default": false
+  }
+}
+

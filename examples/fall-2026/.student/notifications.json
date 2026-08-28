@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "calendar": {
+    "default_reminders_minutes": [2880, 120],
+    "include_completed": false
+  }
+}
+

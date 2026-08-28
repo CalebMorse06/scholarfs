@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-08-27T18:00:00Z",
+  "assignments": [
+    {
+      "id": "stat-quiz-02",
+      "course_code": "STAT-210",
+      "name": "Quiz 2: Probability review",
+      "category": "quiz",
+      "due_at": "2026-09-05T10:00:00-05:00",
+      "cancelled": true,
+      "url": "https://lms.example.invalid/courses/stat-210/quizzes/2",
+      "weight": 3
+    }
+  ]
+}
+

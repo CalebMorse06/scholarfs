@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "id": "example-json",
+  "name": "Offline JSON example",
+  "version": "0.1.0",
+  "description": "Converts a static local fixture into a ScholarFS deadline import.",
+  "capabilities": ["deadline-export"],
+  "credential_policy": "none",
+  "output_schema": "urn:scholarfs:schema:deadline-import:1"
+}
+

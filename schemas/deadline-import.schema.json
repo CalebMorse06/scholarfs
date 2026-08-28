@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scholarfs:schema:deadline-import:1",
+  "title": "ScholarFS connector deadline import",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "connector", "generated_at", "items"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "connector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,63}$" },
+        "version": { "type": "string", "minLength": 1, "maxLength": 50, "pattern": "\\S" }
+      }
+    },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["external_id", "course", "title", "kind", "due", "status"],
+        "properties": {
+          "external_id": { "type": "string", "minLength": 1, "maxLength": 256 },
+          "course": { "type": ["string", "null"], "pattern": "^[A-Z0-9](?:[A-Z0-9._-]{0,30}[A-Z0-9_-])?$" },
+          "title": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "kind": { "enum": ["assignment", "exam", "quiz", "lab", "project", "reading", "presentation", "event", "other"] },
+          "due": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["at"],
+                "properties": { "at": { "type": "string", "format": "date-time" } }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["on"],
+                "properties": { "on": { "type": "string", "format": "date" } }
+              }
+            ]
+          },
+          "status": { "enum": ["pending", "cancelled"] },
+          "url": {
+            "anyOf": [
+              { "type": "null" },
+              { "type": "string", "format": "uri", "pattern": "^https?://" }
+            ]
+          },
+          "priority": { "enum": ["low", "normal", "high", "critical"] },
+          "weight_percent": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+          "estimated_minutes": { "type": ["integer", "null"], "minimum": 1 }
+        }
+      }
+    }
+  }
+}

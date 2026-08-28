@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scholarfs:schema:courses:1",
+  "title": "ScholarFS course index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "courses"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "courses": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/course" }
+    }
+  },
+  "$defs": {
+    "course": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "title", "instructor", "credits", "term", "source", "created_at"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^[A-Z0-9](?:[A-Z0-9._-]{0,30}[A-Z0-9_-])?$" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "instructor": { "type": ["string", "null"], "maxLength": 200 },
+        "credits": { "type": ["number", "null"], "minimum": 0, "maximum": 30 },
+        "term": { "type": ["string", "null"], "maxLength": 100 },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": { "type": { "const": "manual" } }
+        },
+        "created_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

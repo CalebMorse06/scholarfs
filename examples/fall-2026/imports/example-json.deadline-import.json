@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "connector": {
+    "id": "example-json",
+    "version": "0.1.0"
+  },
+  "generated_at": "2026-08-27T18:00:00Z",
+  "items": [
+    {
+      "external_id": "stat-quiz-02",
+      "course": "STAT-210",
+      "title": "Quiz 2: Probability review",
+      "kind": "quiz",
+      "due": { "at": "2026-09-05T10:00:00-05:00" },
+      "status": "cancelled",
+      "url": "https://lms.example.invalid/courses/stat-210/quizzes/2",
+      "priority": "normal",
+      "weight_percent": 3,
+      "estimated_minutes": null
+    }
+  ]
+}
+

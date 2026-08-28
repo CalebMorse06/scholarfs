@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scholarfs"
+version = "0.1.0"
+description = "A local-first workspace standard and CLI for AI-native students."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "ScholarFS contributors" }]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["education", "local-first", "markdown", "student", "ai", "cli"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Education",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Education",
+]
+dependencies = [
+  "tzdata>=2025.2; platform_system == 'Windows'",
+]
+
+[project.urls]
+Homepage = "https://github.com/CalebMorse06/scholarfs"
+Documentation = "https://github.com/CalebMorse06/scholarfs/tree/main/docs"
+Issues = "https://github.com/CalebMorse06/scholarfs/issues"
+
+[project.scripts]
+scholarfs = "scholarfs.cli:main"
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2.2",
+  "jsonschema>=4.23",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+scholarfs = ["templates/*.tpl", "py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

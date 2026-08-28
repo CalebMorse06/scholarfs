@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scholarfs:schema:connector-manifest:1",
+  "title": "ScholarFS external connector manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "name", "version", "description", "capabilities", "credential_policy", "output_schema"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,63}$" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "version": { "type": "string", "minLength": 1, "maxLength": 50 },
+    "description": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["deadline-export"] }
+    },
+    "credential_policy": { "enum": ["none", "environment", "os-keychain"] },
+    "output_schema": { "const": "urn:scholarfs:schema:deadline-import:1" }
+  }
+}
+
