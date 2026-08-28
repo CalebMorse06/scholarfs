@@ -53,7 +53,10 @@ class SymlinkBoundaryTests(WorkspaceFixture, unittest.TestCase):
         linked = alias / "inbox" / "linked-outside"
         self._symlink_or_skip(outside, linked, directory=True)
         report = validate_workspace(alias)
-        self.assertTrue(any("symbolic link" in warning for warning in report.warnings), report.to_dict())
+        self.assertTrue(
+            any("inbox/linked-outside" in warning and "not traversed" in warning for warning in report.warnings),
+            report.to_dict(),
+        )
 
     def test_file_add_refuses_symlinked_source_and_destination(self) -> None:
         real_source = self.root.parent / "source.txt"
