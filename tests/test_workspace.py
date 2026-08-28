@@ -24,7 +24,7 @@ class InitTests(unittest.TestCase):
             sentinel = "student-owned text\n"
             (root / "README.md").write_text(sentinel, encoding="utf-8")
             _, skipped = init_workspace(root, name="Different", term="Spring 2027", merge=True)
-            self.assertIn(root / "README.md", skipped)
+            self.assertIn((root / "README.md").resolve(), (path.resolve() for path in skipped))
             self.assertEqual((root / "README.md").read_text(encoding="utf-8"), sentinel)
 
     def test_init_refuses_nonempty_directory_without_merge(self) -> None:

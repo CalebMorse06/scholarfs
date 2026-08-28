@@ -8,7 +8,7 @@ import unittest
 from scholarfs.context import build_context
 from scholarfs.utils import ScholarFSError
 from scholarfs.validation import validate_workspace
-from scholarfs.workspace import add_file, init_workspace
+from scholarfs.workspace import add_file, init_workspace, list_courses
 
 from tests.helpers import WorkspaceFixture
 
@@ -41,6 +41,19 @@ class SymlinkBoundaryTests(WorkspaceFixture, unittest.TestCase):
         self._symlink_or_skip(outside, marker)
         with self.assertRaises(ScholarFSError):
             build_context(self.root)
+
+    def test_workspace_root_alias_is_trusted_boundary(self) -> None:
+        alias = self.root.parent / "semester-alias"
+        self._symlink_or_skip(self.root, alias, directory=True)
+
+        self.assertEqual(list_courses(alias), [])
+
+        outside = self.root.parent / "aliased-outside"
+        outside.mkdir()
+        linked = alias / "inbox" / "linked-outside"
+        self._symlink_or_skip(outside, linked, directory=True)
+        report = validate_workspace(alias)
+        self.assertTrue(any("symbolic link" in warning for warning in report.warnings), report.to_dict())
 
     def test_file_add_refuses_symlinked_source_and_destination(self) -> None:
         real_source = self.root.parent / "source.txt"

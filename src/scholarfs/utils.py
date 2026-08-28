@@ -171,15 +171,21 @@ def is_redirecting_path(path: Path) -> bool:
 
 def has_symlink_component(root: Path, candidate: Path) -> bool:
     """Return true when a path redirects through a link or leaves its root."""
-    root = root.resolve()
-    lexical = candidate.absolute()
+    # Inspect only path components *inside* the workspace. Resolving the root
+    # before calculating the relative path makes ordinary OS-level aliases look
+    # like workspace links: macOS exposes /var through /private/var, and Windows
+    # may expose a temporary directory through both its short and long names.
+    # Containment is still checked with resolved paths below, so a real link that
+    # leaves the workspace remains blocked.
+    lexical_root = root.expanduser().absolute()
+    lexical = candidate.expanduser().absolute()
     try:
-        relative = lexical.relative_to(root)
+        relative = lexical.relative_to(lexical_root)
     except ValueError:
         return True
-    if not is_within(root, lexical):
+    if not is_within(lexical_root, lexical):
         return True
-    cursor = root
+    cursor = lexical_root
     for part in relative.parts:
         cursor = cursor / part
         if is_redirecting_path(cursor):
